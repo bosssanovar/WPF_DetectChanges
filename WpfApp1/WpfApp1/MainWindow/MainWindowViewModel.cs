@@ -126,6 +126,11 @@ namespace WpfApp1.MainWindow
             _model.LoadEntity();
         }
 
+        private void UpdateEntitySnapShot()
+        {
+            _model.LoadEntitySnapShot();
+        }
+
         #endregion --------------------------------------------------------------------------------------------
 
         #region Methods - override ----------------------------------------------------------------------------

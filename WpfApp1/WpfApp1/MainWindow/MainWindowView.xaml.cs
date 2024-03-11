@@ -166,6 +166,7 @@ namespace WpfApp1.MainWindow
             base.OnContentRendered(e);
 
             UpdateEntity();
+            UpdateEntitySnapShot();
         }
 
         #endregion --------------------------------------------------------------------------------------------

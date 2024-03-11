@@ -78,7 +78,7 @@ namespace WpfApp1.MainWindow
                 }
             });
 
-            EntitySnapShot.Value = _saveLoadUsecase.LoadSnapShot();
+            LoadEntitySnapShot();
         }
 
         #endregion --------------------------------------------------------------------------------------------
@@ -96,6 +96,15 @@ namespace WpfApp1.MainWindow
             InitDetails();
         }
 
+        /// <summary>
+        /// Entityのスナップショットを読み込みます。
+        /// </summary>
+        public void LoadEntitySnapShot()
+        {
+            EntitySnapShot.Value = _saveLoadUsecase.LoadSnapShot();
+            UpdateDetailsSnapShot();
+        }
+
         #endregion --------------------------------------------------------------------------------------------
 
         #region Methods - internal ----------------------------------------------------------------------------
@@ -108,7 +117,7 @@ namespace WpfApp1.MainWindow
             _initUsecase.Init();
 
             LoadEntity();
-            EntitySnapShot.Value = _saveLoadUsecase.LoadSnapShot();
+            LoadEntitySnapShot();
         }
 
         /// <summary>
@@ -154,6 +163,15 @@ namespace WpfApp1.MainWindow
             }
 
             Details.Clear();
+        }
+
+        private void UpdateDetailsSnapShot()
+        {
+            var detailCount = Details.Count;
+            for(var i = 0; i < detailCount; i++)
+            {
+                Details[i].UpdateSnapShot(EntitySnapShot.Value.SpeakerOnOff.Details[i]);
+            }
         }
 
         private void Detail_ContentChanged()

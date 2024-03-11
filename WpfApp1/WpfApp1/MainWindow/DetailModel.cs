@@ -29,6 +29,11 @@ namespace WpfApp1.MainWindow
         /// </summary>
         public ReactivePropertySlim<SpeakerOnOffDetailEntity> Entity { get; }
 
+        /// <summary>
+        /// エンティティのスナップショット
+        /// </summary>
+        public ReactivePropertySlim<SpeakerOnOffDetailEntity> EntitySnapShot { get; } = new();
+
         #endregion --------------------------------------------------------------------------------------------
 
         #region Events ----------------------------------------------------------------------------------------
@@ -72,6 +77,15 @@ namespace WpfApp1.MainWindow
         internal void ForceNotify()
         {
             Entity.ForceNotify();
+        }
+
+        /// <summary>
+        /// Entityのスナップショットを更新します。
+        /// </summary>
+        /// <param name="snapShot">Entityのスナップショット</param>
+        internal void UpdateSnapShot(SpeakerOnOffDetailEntity snapShot)
+        {
+            EntitySnapShot.Value = snapShot;
         }
 
         #endregion --------------------------------------------------------------------------------------------

@@ -16,5 +16,15 @@ namespace Usecase
         {
             return repository.Load();
         }
+
+        public void SaveSnapShot(XXEntity entity)
+        {
+            repository.SaveSnapShot(entity);
+        }
+
+        public XXEntity LoadSnapShot()
+        {
+            return repository.LoadSnapShot();
+        }
     }
 }

@@ -51,6 +51,7 @@ namespace WpfApp1.Setup
         internal void Save()
         {
             _saveLoadUsecase.Save(Entity.Value);
+            _saveLoadUsecase.SaveSnapShot(Entity.Value);
         }
     }
 }

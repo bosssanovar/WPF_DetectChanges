@@ -4,21 +4,34 @@ namespace Repository
 {
     public class InMemoryXXRepository : IXXRepository
     {
-        public XXEntity XXEntity { get; private set; }
+        private XXEntity _entity;
+
+        private XXEntity _entitySnapShot;
 
         public InMemoryXXRepository()
         {
-            XXEntity = new XXEntity();
+            _entity = new XXEntity();
+            _entitySnapShot = new XXEntity();
         }
 
         public XXEntity Load()
         {
-            return XXEntity.Clone();
+            return _entity.Clone();
         }
 
         public void Save(XXEntity entity)
         {
-            XXEntity = entity.Clone();
+            _entity = entity.Clone();
+        }
+
+        public void SaveSnapShot(XXEntity entity)
+        {
+            _entitySnapShot = entity.Clone();
+        }
+
+        public XXEntity LoadSnapShot()
+        {
+            return _entitySnapShot.Clone();
         }
     }
 }

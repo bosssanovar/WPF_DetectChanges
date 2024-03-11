@@ -46,6 +46,11 @@ namespace WpfApp1.MainWindow
         /// </summary>
         public ObservableCollection<DetailModel> Details { get; } = new ObservableCollection<DetailModel>();
 
+        /// <summary>
+        /// エンティティのスナップショット
+        /// </summary>
+        public ReactivePropertySlim<XXEntity> EntitySnapShot { get; } = new();
+
         #endregion --------------------------------------------------------------------------------------------
 
         #region Events ----------------------------------------------------------------------------------------
@@ -72,6 +77,8 @@ namespace WpfApp1.MainWindow
                     _saveLoadUsecase.Save(x);
                 }
             });
+
+            EntitySnapShot.Value = _saveLoadUsecase.LoadSnapShot();
         }
 
         #endregion --------------------------------------------------------------------------------------------
@@ -99,7 +106,9 @@ namespace WpfApp1.MainWindow
         internal void Init()
         {
             _initUsecase.Init();
+
             LoadEntity();
+            EntitySnapShot.Value = _saveLoadUsecase.LoadSnapShot();
         }
 
         /// <summary>

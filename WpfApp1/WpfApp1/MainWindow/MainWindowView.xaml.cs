@@ -63,12 +63,8 @@ namespace WpfApp1.MainWindow
             IsTextChanged =
                 _model.Entity.CombineLatest(
                     _model.EntitySnapShot,
-                    (entity, snapShot) =>
-                    {
-                        Debug.WriteLine($"{entity.Text.Content}, {snapShot.Text.Content}");
-                        return entity.Text != snapShot.Text;
-                    })
-                .ToReadOnlyReactivePropertySlim();
+                    (entity, snapShot) => entity.Text != snapShot.Text)
+                .ToReadOnlyReactivePropertySlim(mode: ReactivePropertyMode.DistinctUntilChanged);
 
             Number = _model.Entity.ToReactivePropertySlimAsSynchronized(
                 x => x.Value,

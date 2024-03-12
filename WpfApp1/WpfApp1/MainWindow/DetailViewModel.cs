@@ -1,11 +1,14 @@
 ﻿using Entity.XX;
+
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,6 +37,11 @@ namespace WpfApp1.MainWindow
         /// スピーカーON/OFF設定のDetail
         /// </summary>
         public List<ReactivePropertySlim<bool>> SpeakerOnOff { get; set; } = new();
+
+        /// <summary>
+        /// スピーカーON/OFF設定が変更されたか
+        /// </summary>
+        public List<ReadOnlyReactivePropertySlim<bool>> IsSpeakerOnOffChanged { get; set; } = new();
 
         #endregion --------------------------------------------------------------------------------------------
 
@@ -78,6 +86,15 @@ namespace WpfApp1.MainWindow
                     .AddTo(_disposable);
 
                 SpeakerOnOff.Add(sp);
+
+                var isChanged =
+                    _model.Entity.CombineLatest(
+                        _model.EntitySnapShot,
+                        (entity, snapShot) => entity.SpeakerOnOffDetail[index] != snapShot.SpeakerOnOffDetail[index])
+                        .ToReadOnlyReactivePropertySlim(mode: ReactivePropertyMode.DistinctUntilChanged)
+                        .AddTo(_disposable);
+
+                IsSpeakerOnOffChanged.Add(isChanged);
             }
         }
 

@@ -16,6 +16,7 @@ namespace Usecase
             var entity = repository.Load();
             entity.Init();
             repository.Save(entity);
+            repository.SaveSnapShot(entity);
         }
     }
 }

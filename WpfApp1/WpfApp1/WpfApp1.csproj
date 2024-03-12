@@ -30,6 +30,7 @@
     <ProjectReference Include="..\EntityMonitor\EntityMonitor.csproj" />
     <ProjectReference Include="..\Entity\Entity.csproj" />
     <ProjectReference Include="..\Usecase\Usecase.csproj" />
+    <ProjectReference Include="..\WpfLibrary\WpfLibrary.csproj" />
   </ItemGroup>
 
 </Project>

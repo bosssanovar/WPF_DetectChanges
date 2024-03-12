@@ -1,6 +1,10 @@
 ﻿using Entity.XX;
+
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
+
+using System.Diagnostics;
+using System.Reactive.Linq;
 using System.Windows;
 
 namespace WpfApp1.MainWindow
@@ -56,6 +60,15 @@ namespace WpfApp1.MainWindow
                 },
                 ReactivePropertyMode.DistinctUntilChanged)
                 .AddTo(_disposable);
+            IsTextChanged =
+                _model.Entity.CombineLatest(
+                    _model.EntitySnapShot,
+                    (entity, snapShot) =>
+                    {
+                        Debug.WriteLine($"{entity.Text.Content}, {snapShot.Text.Content}");
+                        return entity.Text != snapShot.Text;
+                    })
+                .ToReadOnlyReactivePropertySlim();
 
             Number = _model.Entity.ToReactivePropertySlimAsSynchronized(
                 x => x.Value,

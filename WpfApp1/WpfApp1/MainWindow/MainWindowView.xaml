@@ -49,7 +49,8 @@
                        Visibility="{Binding IsNumberChanged.Value, Converter={StaticResource boolToVisibility}}"/>
             <CheckBox Grid.Column="1" Grid.Row="2" Margin="5" Content="Sample Text" HorizontalAlignment="Left"
                       IsChecked="{Binding Bool.Value}"
-                      Foreground="{Binding IsBoolChanged.Value, Converter={StaticResource boolToColorConverter}}"/>
+                      Foreground="{Binding IsBoolChanged.Value, Converter={StaticResource boolToColorConverter}}"
+                      BorderBrush="{Binding IsBoolChanged.Value, Converter={StaticResource boolToColorConverter}}"/>
             <ComboBox Grid.Column="1" Grid.Row="3" Margin="5" ItemsSource="{Binding ComboBoxItems.Value}"
                       DisplayMemberPath="Display" SelectedValuePath="Value" SelectedValue="{Binding SomeEnum.Value}"
                       Foreground="{Binding IsSomeEnumChanged.Value, Converter={StaticResource boolToColorConverter}}"/>

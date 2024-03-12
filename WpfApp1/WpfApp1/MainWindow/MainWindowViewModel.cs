@@ -55,9 +55,19 @@ namespace WpfApp1.MainWindow
         public ReactivePropertySlim<bool> Bool { get; }
 
         /// <summary>
+        /// Bool設定が変更されたか
+        /// </summary>
+        public ReadOnlyReactivePropertySlim<bool> IsBoolChanged { get; }
+
+        /// <summary>
         /// SomeEnum設定
         /// </summary>
         public ReactivePropertySlim<SomeEnum> SomeEnum { get; }
+
+        /// <summary>
+        /// SomeEnum設定が変更されたか
+        /// </summary>
+        public ReadOnlyReactivePropertySlim<bool> IsSomeEnumChanged { get; }
 
         /// <summary>
         /// SpeakerOnOffコレクション設定

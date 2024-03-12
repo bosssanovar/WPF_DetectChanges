@@ -60,11 +60,13 @@ namespace WpfApp1.MainWindow
                 },
                 ReactivePropertyMode.DistinctUntilChanged)
                 .AddTo(_disposable);
+
             IsTextChanged =
                 _model.Entity.CombineLatest(
                     _model.EntitySnapShot,
                     (entity, snapShot) => entity.Text != snapShot.Text)
-                .ToReadOnlyReactivePropertySlim(mode: ReactivePropertyMode.DistinctUntilChanged);
+                .ToReadOnlyReactivePropertySlim(mode: ReactivePropertyMode.DistinctUntilChanged)
+                .AddTo(_disposable);
 
             Number = _model.Entity.ToReactivePropertySlimAsSynchronized(
                 x => x.Value,
@@ -96,6 +98,13 @@ namespace WpfApp1.MainWindow
                 ReactivePropertyMode.DistinctUntilChanged)
                 .AddTo(_disposable);
 
+            IsBoolChanged =
+                _model.Entity.CombineLatest(
+                    _model.EntitySnapShot,
+                    (entity, snapShot) => entity.Bool != snapShot.Bool)
+                .ToReadOnlyReactivePropertySlim(mode: ReactivePropertyMode.DistinctUntilChanged)
+                .AddTo(_disposable);
+
             SomeEnum = _model.Entity.ToReactivePropertySlimAsSynchronized(
                 x => x.Value,
                 x => x.SomeEnum.Content,
@@ -109,6 +118,13 @@ namespace WpfApp1.MainWindow
                     return _model.Entity.Value;
                 },
                 ReactivePropertyMode.DistinctUntilChanged)
+                .AddTo(_disposable);
+
+            IsSomeEnumChanged =
+                _model.Entity.CombineLatest(
+                    _model.EntitySnapShot,
+                    (entity, snapShot) => entity.SomeEnum != snapShot.SomeEnum)
+                .ToReadOnlyReactivePropertySlim(mode: ReactivePropertyMode.DistinctUntilChanged)
                 .AddTo(_disposable);
 
             SpeakerOnOffs = _model.Details.ToReadOnlyReactiveCollection(x => new DetailViewModel(x))

@@ -83,6 +83,13 @@ namespace WpfApp1.MainWindow
                 ReactivePropertyMode.DistinctUntilChanged)
                 .AddTo(_disposable);
 
+            IsNumberChanged =
+                _model.Entity.CombineLatest(
+                    _model.EntitySnapShot,
+                    (entity, snapShot) => entity.Number != snapShot.Number)
+                .ToReadOnlyReactivePropertySlim(mode: ReactivePropertyMode.DistinctUntilChanged)
+                .AddTo(_disposable);
+
             Bool = _model.Entity.ToReactivePropertySlimAsSynchronized(
                 x => x.Value,
                 x => x.Bool.Content,

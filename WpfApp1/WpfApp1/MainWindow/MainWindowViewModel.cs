@@ -50,6 +50,11 @@ namespace WpfApp1.MainWindow
         public ReactivePropertySlim<int> Number { get; }
 
         /// <summary>
+        /// Number設定が変更されたか
+        /// </summary>
+        public ReadOnlyReactivePropertySlim<bool> IsNumberChanged { get; }
+
+        /// <summary>
         /// Bool設定
         /// </summary>
         public ReactivePropertySlim<bool> Bool { get; }
